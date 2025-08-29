@@ -79,7 +79,7 @@ This launches the Streamlit dashboard where you can:
 * See the fraud probability predicted by the hybrid model.
 
 ## Project Structure
-```bash
+```
 .
 ├── README.md
 ├── requirements.txt
