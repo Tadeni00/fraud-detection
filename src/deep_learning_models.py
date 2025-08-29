@@ -1,16 +1,12 @@
 # src/deep_learning_models.py
 import numpy as np
-try:
-    import tensorflow as tf
-    from tensorflow import keras
-    from tensorflow.keras import layers
-except Exception:
-    tf = None
-    keras = None
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+
 
 def build_autoencoder(input_dim: int, encoding_dim: int = 16):
-    if keras is None:
-        raise RuntimeError("tensorflow not available")
+    
     i = keras.Input(shape=(input_dim,))
     e = layers.Dense(encoding_dim, activation="relu")(i)
     d = layers.Dense(input_dim, activation="linear")(e)
@@ -19,8 +15,6 @@ def build_autoencoder(input_dim: int, encoding_dim: int = 16):
     return m
 
 def train_autoencoder(X, encoding_dim=16, epochs=20, batch_size=256, validation_split=0.1, verbose=1):
-    if keras is None:
-        raise RuntimeError("tensorflow not available")
     X = np.asarray(X, dtype=np.float32)
     m = build_autoencoder(X.shape[1], encoding_dim)
     cb = [tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=5, restore_best_weights=True)]

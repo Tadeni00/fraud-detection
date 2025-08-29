@@ -2,11 +2,8 @@
 from typing import Tuple, Dict, Any, Optional
 import numpy as np
 import pandas as pd
-try:
-    from scipy.stats import ks_2samp, chi2_contingency
-    SCIPY = True
-except Exception:
-    SCIPY = False
+from scipy.stats import ks_2samp, chi2_contingency
+SCIPY = True
 
 def simulate_drift(df: pd.DataFrame, *, scenario: str = "mixed", severity: float = 0.2, seed: int = 0) -> pd.DataFrame:
     rng = np.random.RandomState(seed)

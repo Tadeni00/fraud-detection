@@ -6,12 +6,12 @@ import joblib
 import os
 import matplotlib.pyplot as plt
 
-st.set_page_config(page_title="YouVerify - Quick Scoring App", layout="wide")
+st.set_page_config(page_title="Fraud Detection - Quick Scoring App", layout="wide")
 
 DEFAULT_PREPROCESSOR = "artifacts/preprocessor.joblib"
 DEFAULT_MODEL = "artifacts/best_hybrid.joblib"
 
-st.title("YouVerify — quick scoring (preprocessor + model)")
+st.title("Fraud Detection — quick scoring (preprocessor + model)")
 
 # Sidebar: artifacts selection
 with st.sidebar.expander("Artifacts / settings", expanded=True):

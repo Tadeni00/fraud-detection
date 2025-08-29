@@ -16,12 +16,8 @@ from sklearn.metrics import roc_auc_score, precision_recall_curve, auc
 from sklearn.model_selection import StratifiedKFold
 
 # optional XGBoost - include if available
-try:
-    from xgboost import XGBClassifier
-    _HAS_XGB = True
-except Exception:
-    XGBClassifier = None
-    _HAS_XGB = False
+
+from xgboost import XGBClassifier
 
 def get_base_supervised(random_state: int = 0):
     """Return list of (name, estimator) base learners."""
@@ -32,8 +28,8 @@ def get_base_supervised(random_state: int = 0):
         ("svc", SVC(probability=True, kernel="rbf")),
         ("dt", DecisionTreeClassifier(random_state=random_state)),
     ]
-    if _HAS_XGB:
-        base.append(("xgb", XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=random_state)))
+
+    base.append(("xgb", XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=random_state)))
     return base
 
 def compute_metrics(y_true: np.ndarray, scores: np.ndarray) -> Dict[str, float]:

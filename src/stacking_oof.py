@@ -20,12 +20,8 @@ from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression as LR
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
-try:
-    from xgboost import XGBClassifier
-    _HAS_XGB = True
-except Exception:
-    XGBClassifier = None
-    _HAS_XGB = False
+from xgboost import XGBClassifier
+_HAS_XGB = True
 
 def get_base_supervised_models(random_state: int = 0):
     models = [
@@ -35,8 +31,7 @@ def get_base_supervised_models(random_state: int = 0):
         ("svc", SVC(probability=True)),
         ("dt", DecisionTreeClassifier(random_state=random_state))
     ]
-    if _HAS_XGB:
-        models.append(("xgb", XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=random_state)))
+    models.append(("xgb", XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=random_state)))
     return models
 
 def _prob_from_model(model, X):

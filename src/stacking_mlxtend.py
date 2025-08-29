@@ -12,20 +12,8 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import roc_auc_score, precision_recall_curve, auc
 from sklearn.model_selection import StratifiedKFold
-
-try:
-    from mlxtend.classifier import StackingCVClassifier
-    _HAS_MLXTEND = True
-except Exception as e:
-    _HAS_MLXTEND = False
-
-# optional XGB
-try:
-    from xgboost import XGBClassifier
-    _HAS_XGB = True
-except Exception:
-    XGBClassifier = None
-    _HAS_XGB = False
+from mlxtend.classifier import StackingCVClassifier
+from xgboost import XGBClassifier
 
 def get_base_supervised_simple(random_state: int = 0):
     clfs = [
@@ -34,8 +22,8 @@ def get_base_supervised_simple(random_state: int = 0):
         SVC(probability=True),
         DecisionTreeClassifier(random_state=random_state)
     ]
-    if _HAS_XGB:
-        clfs.append(XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=random_state))
+
+    clfs.append(XGBClassifier(use_label_encoder=False, eval_metric="logloss", random_state=random_state))
     return clfs
 
 def compute_metrics(y_true, scores):
@@ -48,12 +36,8 @@ def compute_metrics(y_true, scores):
     return out
 
 def fit_and_evaluate_stack_mlxtend(X_train, y_train, X_test=None, y_test=None, cv=5, meta=None, random_state=0):
-    if not _HAS_MLXTEND:
-        raise ImportError("mlxtend is required for this module. Install with `pip install mlxtend`")
-
     base_clfs = get_base_supervised_simple(random_state=random_state)
-    if meta is None:
-        meta = LogisticRegression(max_iter=2000)
+    meta = LogisticRegression(max_iter=2000)
 
     stack = StackingCVClassifier(classifiers=base_clfs, meta_classifier=meta, use_probas=True, cv=cv, store_train_meta_features=False, refit=True, verbose=0)
     stack.fit(np.asarray(X_train), np.asarray(y_train))

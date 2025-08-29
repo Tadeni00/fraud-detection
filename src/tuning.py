@@ -2,10 +2,14 @@
 from typing import Any, Dict, Optional, Tuple
 import joblib
 import numpy as np
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers, optimizers
 from sklearn.model_selection import RandomizedSearchCV, GridSearchCV, StratifiedKFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.metrics import make_scorer, f1_score, average_precision_score
+from xgboost import XGBClassifier
 from scipy.stats import uniform, randint
 from math import ceil
 
@@ -62,13 +66,7 @@ def tune_autoencoder_manual(train_X, y_train, param_grid=None, epochs=20, batch_
     # keep small default grid
     if param_grid is None:
         param_grid = {"encoding_dim": [8, 16, 32], "lr": [1e-3, 5e-4]}
-    import numpy as np
-    try:
-        import tensorflow as tf
-        from tensorflow import keras
-        from tensorflow.keras import layers, optimizers
-    except Exception as e:
-        raise RuntimeError("tensorflow needed for autoencoder tuning") from e
+    
 
     best = None
     best_score = -np.inf
@@ -101,11 +99,6 @@ def tune_xgboost(X, y, n_iter=40, cv=5, random_state=0, scoring="average_precisi
     """Randomized search for XGBClassifier with early stopping (uses eval_set).
     Returns fitted RandomizedSearchCV object.
     """
-    try:
-        from xgboost import XGBClassifier
-    except Exception as e:
-        raise RuntimeError("xgboost not installed") from e
-
     # compute scale_pos_weight recommended for imbalanced binary classification
     pos = int(np.sum(y == 1))
     neg = int(np.sum(y == 0))
