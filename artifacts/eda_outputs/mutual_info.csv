@@ -1,0 +1,25 @@
+feature,mi
+location_Other NG,0.014897551402601295
+channel_online,0.006850144634429789
+balance_before,0.006560442091042118
+device_type_tablet,0.006257672959066429
+location_Port Harcourt,0.005591655478957902
+amount,0.00537253286119066
+location_GB,0.0021822042790571317
+channel_POS,0.0018562900751537548
+location_CN,0.0017979554261342567
+age,0.0012331100041429455
+account_tenure_months,0.0009655742324696792
+tx_type_withdrawal,0.0006109624698122929
+location_DE,0.00041909900054215576
+location_Kano,2.8171657703746078e-05
+merchant_category_entertainment,0.0
+merchant_category_electronics,0.0
+merchant_category_travel,0.0
+merchant_category_grocery,0.0
+device_type_mobile,0.0
+merchant_category_utilities,0.0
+location_Lagos,0.0
+location_IN,0.0
+location_US,0.0
+tx_type_transfer,0.0

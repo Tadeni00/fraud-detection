@@ -1,0 +1,15 @@
+// Fraud Detection System Overview
+digraph {
+	rankdir=LR size=8
+	D [label="Transaction Data"]
+	P [label=Preprocessing]
+	F [label="Feature Engineering"]
+	M [label="ML Model"]
+	R [label="Risk Scoring"]
+	A [label="Alerts/Action"]
+	D -> P
+	P -> F
+	F -> M
+	M -> R
+	R -> A
+}

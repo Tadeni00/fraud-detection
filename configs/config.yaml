@@ -1,0 +1,32 @@
+# configs/config.yaml
+data:
+  raw_path: data/raw/transactions.csv
+  processed_path: data/processed/transactions.parquet
+
+preprocessing:
+  fill_strategy: median
+  datetime_col: timestamp
+
+features:
+  derive_amount_per_tenure: true
+  label_encode_cols:
+    - merchant_category
+    - device_type
+    - channel
+    - country
+    - tx_type
+
+models:
+  unsupervised:
+    dbscan:
+      eps: 0.5
+      min_samples: 5
+    isolation_forest:
+      contamination: 0.01
+  supervised:
+    cv_folds: 5
+    scoring: average_precision
+  autoencoder:
+    latent_dim: 8
+    epochs: 50
+    batch_size: 256

@@ -1,0 +1,19 @@
+// ML Approaches
+digraph {
+	rankdir=TB
+	ML [label="Fraud Detection ML Approaches"]
+	S [label="Supervised
+(Logistic Regression,
+Random Forest, XGBoost)"]
+	U [label="Unsupervised
+(Isolation Forest,
+Clustering)"]
+	DL [label="Deep Learning
+(Neural Networks,
+Autoencoders)"]
+	H [label="Hybrid
+(Supervised + Unsupervised)"]
+	MLS -> MLU
+	MLU -> MLDL
+	MLDL -> MLH
+}

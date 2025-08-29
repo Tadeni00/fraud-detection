@@ -1,0 +1,15 @@
+// Workflow Pipeline
+digraph {
+	rankdir=LR size=10
+	C [label="1. Collect & Preprocess Data" color=lightblue shape=box style="rounded,filled"]
+	F [label="2. Feature Engineering" color=lightblue shape=box style="rounded,filled"]
+	T [label="3. Train & Evaluate Models" color=lightblue shape=box style="rounded,filled"]
+	D [label="4. Deploy into Production" color=lightblue shape=box style="rounded,filled"]
+	S [label="5. Real-time Scoring" color=lightblue shape=box style="rounded,filled"]
+	M [label="6. Monitoring & Retraining" color=lightblue shape=box style="rounded,filled"]
+	C -> F
+	F -> T
+	T -> D
+	D -> S
+	S -> M
+}

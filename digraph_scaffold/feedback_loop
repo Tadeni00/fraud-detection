@@ -1,0 +1,16 @@
+// Feedback Loop
+digraph {
+	rankdir=LR
+	T [label=Transactions]
+	S [label="Scored by Model"]
+	F [label="Flagged for Review"]
+	R [label="Human Review"]
+	B [label="Feedback Data"]
+	M [label="Retrain Model"]
+	T -> S
+	S -> F
+	F -> R
+	R -> B
+	B -> M
+	M -> S [label="Improved Model"]
+}
