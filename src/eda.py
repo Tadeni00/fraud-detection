@@ -63,7 +63,7 @@ def univariate_categorical(df: pd.DataFrame, feature: str, target: Optional[str]
     # --- Count plot ---
     counts = sub[feature].value_counts()
     plt.figure(figsize=(8, 4))
-    ax = sns.barplot(x=counts.index, y=counts.values, palette="coolwarm", hue = is_fraud)
+    ax = sns.barplot(x=counts.index, y=counts.values, hue=counts.index, palette="coolwarm")
     
     # Annotate counts
     for i, val in enumerate(counts.values):
