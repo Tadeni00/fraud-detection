@@ -84,7 +84,7 @@ This launches the Streamlit dashboard where you can:
 ├── README.md
 ├── requirements.txt
 ├── data/
-│   └── raw/transactions.csv                 # example synthetic data generator included
+│   └── raw/transactions.csv                 # synthetic data
 ├── src/
 │   ├── data_preprocessing.py
 │   ├── feature_engineering.py
